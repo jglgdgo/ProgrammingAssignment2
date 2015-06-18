@@ -5,6 +5,8 @@
 ## calculate its inverse, and if it has been already calculated, cache it. 
 ## setm and setinv allocate the values of the matrix and its inverse accordingly
 ## getm and getinv retreive the values of the matrix and its inverse accordingly
+## the input argument is a invertible matrix and the output is a list of
+## functions.
 
 makeCacheMatrix <- function(x = matrix()) {
   inv <- matrix()
@@ -24,7 +26,11 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Computes the inverse of a matrix and if it has been already calculated, 
-## retreives it from memory
+## retreives it from memory. 
+## The input is a list of matrix functions that allow to allocate and retrieve
+## values from memmory. The output is the inverse of the matrix associated
+## with the list (x) and if it has been calcualted it diplays the appropiate
+## message.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -32,6 +38,7 @@ cacheSolve <- function(x, ...) {
   if(!anyNA(inv) ) {
     message("getting cached data")
     return(inv)
+    
   }
   data <- x$getm()
   inv <- solve(data, ...)
